@@ -35,3 +35,4 @@ databases:
   - name: n8n-db
     databaseName: n8n
     user: n8n_user
+    plan: free
