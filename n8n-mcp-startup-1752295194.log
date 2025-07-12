@@ -1,0 +1,40 @@
+[Sat Jul 12 00:39:54 EDT 2025] n8n-MCP Startup Log
+----------------------------------------
+
+[1m[0;36m╔══════════════════════════════════════════╗
+║ 🚀 n8n-MCP Optimized Startup Sequence 🚀 ║
+╚══════════════════════════════════════════╝[0m
+
+[1m[0;34m⚙️  PHASE 1: Environment Initialization[0m
+[1m[0;35m🔄 Regenerating and syncing AUTH_TOKEN...[0m
+  [0;32m✓[0m Updated AUTH_TOKEN in .env
+  [0;32m✓[0m Robustly updated AUTH_TOKEN in mcp_config_link.json using jq
+  [0;34mℹ️ Filesystem synced to guarantee token write.[0m
+[0;32m✅ AUTH_TOKEN regenerated and synced successfully.[0m
+[0;34mℹ️ Found n8n-mcp/.env file. Using credentials from there...[0m
+[0;36m🌐 Testing n8n API connection...[0m
+[0;32m✅ API connection successful (HTTP 200)[0m
+
+[1m[0;34m🚦 PHASE 2: Server Launch[0m
+[1m[0;36m🔍 Scanning for available ports...[0m
+[0;32m✅ Using configured port: [1m8531[0m
+[1m[0;34m🚀 Starting server in [0;35mhttp[0;34m mode...[0m
+[1m[0;36m🕺 Running health checks...[0m
+  [2m[1/3][0m Testing health endpoint...
+    [0;32m✅ Health endpoint is OK (HTTP 200)[0m
+  [2m[2/3][0m Verifying server process and port...
+    [0;32m✅ Server process is running (PID: 53804) and port 8531 is listening[0m
+  [2m[3/3][0m Performing end-to-end MCP tool call validation...
+    [0;34mℹ️ Using AUTH_TOKEN: l1B1i...Q3WtA[0m
+    [0;32m✅ MCP tool call successful. Server is fully operational.[0m
+[0;32m✅ All health checks passed. Server is ready![0m
+
+[1m[0;32m✅ Startup Successful![0m
+[0;36m┌──────────────────────────────┐
+│ Mode:    [1mHTTP[0m[0;36m
+│ Port:    [1m8531[0m[0;36m
+│ PID:     [1m53804[0m[0;36m
+│ Logs:    n8n-mcp-*.log
+└──────────────────────────────┘[0m
+
+[1m[0;32m✅ n8n-MCP server is running and configured for Windsurf.[0m

@@ -1,0 +1,1274 @@
+{
+  "name": "NCA Modules",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        820
+      ],
+      "id": "a9664718-707b-4b03-a1a7-36b58d97e720",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "content": "## Video",
+        "height": 280,
+        "width": 1760
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -560,
+        -580
+      ],
+      "typeVersion": 1,
+      "id": "e81dbfc2-304c-456a-8cfb-cf7aa39986c6",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/video/caption",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"video_url\": \"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\",\n  \"settings\": {\n    \"line_color\": \"#FFFFFF\",\n    \"word_color\": \"#FFFF00\",\n    \"all_caps\": false,\n    \"max_words_per_line\": 3,\n    \"font_size\": 60,\n    \"bold\": false,\n    \"italic\": false,\n    \"underline\": false,\n    \"strikeout\": false,\n    \"outline_width\": 3,\n    \"shadow_offset\": 4,\n    \"style\": \"highlight\",\n    \"font_family\": \"The Bold Font\",\n    \"position\": \"bottom_center\"\n  },\n  \"id\": \"gdrive-five\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -420,
+        -500
+      ],
+      "id": "0a0cf9c1-b337-4e9c-8e28-3acc17a3e784",
+      "name": "Caption",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/video/thumbnail",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"video_url\": \"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\",\n    \"second\": 0,\n    \"id\": \"gdrive-five\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -220,
+        -500
+      ],
+      "id": "d0b8db3f-0e7c-49f7-b578-b9ddab096ada",
+      "name": "Thumbnail",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/video/concatenate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"video_urls\":[\n        {\"video_url\":\"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\"},\n        {\"video_url\":\"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\"}\n    ],\n    \"id\": \"2323\"\n}",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -20,
+        -500
+      ],
+      "id": "72fc9b25-3b21-4f98-a04a-0ff3024c5931",
+      "name": "Concatenate",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## FFmpeg Compose",
+        "height": 280,
+        "width": 1760,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -560,
+        -260
+      ],
+      "typeVersion": 1,
+      "id": "21913695-7180-40f3-9cc7-44064dd39f75",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Toolkit",
+        "height": 280,
+        "width": 1760,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -560,
+        -900
+      ],
+      "typeVersion": 1,
+      "id": "f751738b-9f0b-46f9-a174-10b98f0ed247",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/ffmpeg/compose",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"inputs\": [\n    {\n      \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/Horizontal Video.mp4\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"filter\": \"[0:v]trim=start=10:end=15,setpts=PTS-STARTPTS[vout];[0:a]atrim=start=10:end=15,asetpts=PTS-STARTPTS[aout]\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"options\": [\n        { \"option\": \"-map\", \"argument\": \"[vout]\" },\n        { \"option\": \"-map\", \"argument\": \"[aout]\" },\n        { \"option\": \"-c:v\", \"argument\": \"libx264\" },\n        { \"option\": \"-c:a\", \"argument\": \"aac\" }\n      ]\n    }\n  ],\n  \"metadata\": {\n    \"thumbnail\": true,\n    \"filesize\": true,\n    \"duration\": true,\n    \"bitrate\": true,\n    \"encoder\": true\n  },\n  \"id\": \"extract_clip_001\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -420,
+        -180
+      ],
+      "id": "15d10628-748b-4ed5-b478-1145818cdc90",
+      "name": "Clip",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/ffmpeg/compose",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"inputs\": [\n    {\n      \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/Horizontal Video.mp4\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"filter\": \"[0:v]crop=658:1080:656:0,scale=1080:1920[v]\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"options\": [\n        {\n          \"option\": \"-map\",\n          \"argument\": \"[v]\"\n        },\n        {\n          \"option\": \"-map\",\n          \"argument\": \"0:a\"\n        },\n        {\n          \"option\": \"-c:a\",\n          \"argument\": \"copy\"\n        }\n      ]\n    }\n  ],\n  \"webhook_url\": \"https://sgplabs.app.n8n.cloud/webhook-test/8e468964-bef8-4e97-a65f-5674280f6788\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -220,
+        -180
+      ],
+      "id": "1c1dd397-43f7-4161-914c-620cd2221d58",
+      "name": "Crop",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/ffmpeg/compose",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"inputs\": [\n        {\n            \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/vertical%20pic%20skool.png\"\n        },\n        {\n            \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/tweet%20pic.png\"\n        }\n    ],\n    \"filters\": [\n        {\n            \"filter\": \"[0:v][1:v]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2+200[outv]\"\n        }\n    ],\n    \"outputs\": [\n        {\n            \"options\": [\n                {\n                    \"option\": \"-map\",\n                    \"argument\": \"[outv]\"\n                },\n                {\n                    \"option\": \"-f\",\n                    \"argument\": \"image2\"\n                }\n            ]\n        }\n    ],\n    \"id\": \"image-overlay\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        180,
+        -180
+      ],
+      "id": "ce1e1c3e-98a8-4df5-8e8d-0513c4908eea",
+      "name": "Tweet Pic",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/ffmpeg/compose",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"inputs\": [\n        {\n            \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\"\n        },\n        {\n            \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/tweet%20pic.png\"\n        }\n    ],\n    \"filters\": [\n        {\n            \"filter\": \"[0:v][1:v]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2+200[outv]\"\n        }\n    ],\n    \"outputs\": [\n        {\n            \"options\": [\n                {\n                    \"option\": \"-map\",\n                    \"argument\": \"[outv]\"\n                },\n                {\n                    \"option\": \"-map\",\n                    \"argument\": \"0:a\"\n                },\n                {\n                    \"option\": \"-c:v\",\n                    \"argument\": \"libx264\"\n                },\n                {\n                    \"option\": \"-c:a\",\n                    \"argument\": \"aac\"\n                },\n                {\n                    \"option\": \"-f\",\n                    \"argument\": \"mp4\"\n                }\n            ]\n        }\n    ],\n    \"id\": \"video-overlay\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        380,
+        -180
+      ],
+      "id": "d8721ace-e086-4d22-ad4e-c3e75bc0e0c9",
+      "name": "Tweet Vid",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/ffmpeg/compose",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"inputs\": [\n    {\n      \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/reaction.mp4\",\n      \"options\": []\n    },\n    {\n      \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/skool%2Breaction.mp4\",\n      \"options\": []\n    }\n  ],\n  \"filters\": [\n    {\n      \"filter\": \"[1:v]scale=1080:1920[preScaledB];[preScaledB]scale=iw*0.45:ih*0.45[scaledB];[scaledB]drawbox=x=0:y=0:w=iw:h=ih:color=red@1:t=25[borderB];[0:v][borderB]overlay=x=500:y=950:enable='lte(t,39)'[videoOut]\"\n    },\n    {\n      \"filter\": \"[0:a][1:a]amix=inputs=2:duration=longest[audioOut]\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"options\": [\n        { \"option\": \"-map\", \"argument\": \"[videoOut]\" },\n        { \"option\": \"-map\", \"argument\": \"[audioOut]\" },\n        { \"option\": \"-c:v\", \"argument\": \"libx264\" },\n        { \"option\": \"-c:a\", \"argument\": \"aac\" },\n        { \"option\": \"-b:a\", \"argument\": \"192k\" }\n      ]\n    }\n  ],\n  \"id\": \"recWwxk2Xnc8lxJSu\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        580,
+        -180
+      ],
+      "id": "e27f6151-51a0-4cfa-a5a6-930ac2232e9b",
+      "name": "Reaction",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/ffmpeg/compose",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"inputs\": [\n    {\n      \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/vertical%20pic%20skool.png\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"filter\": \"drawtext=text='Hello, World!':fontsize=70:fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"options\": [\n        {\n          \"option\": \"-frames:v\",\n          \"argument\": \"1\"\n        },\n        {\n          \"option\": \"-c:v\",\n          \"argument\": \"mjpeg\"\n        },\n        {\n          \"option\": \"-f\",\n          \"argument\": \"image2\"\n        }\n      ]\n    }\n  ],\n  \"id\": \"drawtext-no-font-example\"\n}\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        -180
+      ],
+      "id": "ea1154bd-9555-4c7a-8cfd-2ff5fcea2404",
+      "name": "Drawtext",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/ffmpeg/compose",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"id\": \"image_text_overlay\",\n  \"inputs\": [\n    {\n      \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/Certificate.png\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"filter\": \"[0:v]drawtext=text='Ved':fontsize=55:fontcolor=black:x=(w-text_w)/2:y=820[v1]\"\n    },\n    {\n      \"filter\": \"[v1]drawtext=text='Make Automation Workshop\\\\: Level 1':fontsize=30:fontcolor=black:x=(w-text_w)/2:y=1000[v2]\"\n    },\n    {\n      \"filter\": \"[v2]drawtext=text='Stephen G. Pope':fontsize=25:fontcolor=black:x=410:y=h-310[v3]\"\n    },\n    {\n      \"filter\": \"[v3]drawtext=text='9/13/24':fontsize=25:fontcolor=black:x=w-560:y=h-310[outv]\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"options\": [\n        {\n          \"option\": \"-map\",\n          \"argument\": \"[outv]\"\n        },\n        {\n          \"option\": \"-frames:v\",\n          \"argument\": \"1\"\n        },\n        {\n          \"option\": \"-c:v\",\n          \"argument\": \"mjpeg\"\n        },\n        {\n          \"option\": \"-f\",\n          \"argument\": \"image2\"\n        }\n      ]\n    }\n  ]\n}\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        980,
+        -180
+      ],
+      "id": "e41cd6c9-5e41-4666-b988-b69f7a79223c",
+      "name": "Certificate",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Media",
+        "height": 280,
+        "width": 1760,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -560,
+        60
+      ],
+      "typeVersion": 1,
+      "id": "2b037d51-38d6-430b-a408-a8cedcc9df3b",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/media/convert/mp3",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"media_url\":\"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\",\n    \"bitrate\": \"256k\",\n    \"sample_rate\": 44100,\n    \"id\": \"five\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -420,
+        140
+      ],
+      "id": "eb3671f7-390f-4f00-823b-1b2f5aaa6275",
+      "name": "Convert MP3",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/media/transcribe",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"media_url\":\"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\",\n    \"task\": \"transcribe\",\n    \"include_text\": true,\n    \"include_srt\": true,\n    \"response_type\": \"direct\",\n    \"language\": \"en\",\n    \"words_per_line\": 4\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -220,
+        140
+      ],
+      "id": "e3713935-a30d-4c90-88a1-579d45d0a182",
+      "name": "Transcribe",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/media/silence",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"media_url\":\"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\",\n    \"duration\": 0.1\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -20,
+        140
+      ],
+      "id": "8e469771-aa1d-4fe6-83bb-f28d6f35108b",
+      "name": "Silence",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/BETA/media/download",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"media_url\":\"https://www.tiktok.com/@stephengpope/video/7496166998871739694\",\n    \"thumbnails\": {\n        \"download\": true\n    }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        180,
+        140
+      ],
+      "id": "fc1d88d2-cf22-45f8-a2be-9e089ec87ccf",
+      "name": "Donwload (BETA)",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/media/convert",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"media_url\":\"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\",\n    \"format\": \"mp3\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        380,
+        140
+      ],
+      "id": "8bbe6f95-918e-46f6-87a5-eee8eff0a6fc",
+      "name": "Convert",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Image",
+        "height": 280,
+        "width": 340,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -560,
+        380
+      ],
+      "typeVersion": 1,
+      "id": "a08ed3db-a56d-45da-a259-88ac02ed4a2a",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/authenticate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -420,
+        -820
+      ],
+      "id": "a4427282-fd9c-4527-afa2-ede64253b346",
+      "name": "Authenticate",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/toolkit/test",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -220,
+        -820
+      ],
+      "id": "83110006-e253-496e-9913-7362dc2d9a6f",
+      "name": "Test",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/image/convert/video",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"image_url\":\"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Image.png\",\n    \"length\": 10,\n    \"frame_rate\": 25,\n    \"zoom_speed\": 6,\n    \"id\": \"local-extract\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -420,
+        460
+      ],
+      "id": "e89e67dc-6285-41f8-8605-9c2234d7a8c1",
+      "name": "Convert Video",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Code",
+        "height": 280,
+        "width": 300
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -180,
+        380
+      ],
+      "typeVersion": 1,
+      "id": "eb797e05-ffea-49ef-8332-40763f22786f",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/code/execute/python",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"code\": \"# Initial array of titles\\ntitles = [\\n    {\\\"title\\\": \\\"how i learned to code in 24 hours straight\\\"},\\n    {\\\"title\\\": \\\"making the perfect pizza at 3am\\\"},\\n    {\\\"title\\\": \\\"i survived on $1 food for a week\\\"},\\n    {\\\"title\\\": \\\"trying weird food combinations you suggested\\\"},\\n    {\\\"title\\\": \\\"we bought everything in the store challenge\\\"},\\n    {\\\"title\\\": \\\"my morning routine 2024 updated\\\"},\\n    {\\\"title\\\": \\\"exploring abandoned mansion gone wrong\\\"},\\n    {\\\"title\\\": \\\"pranking my roommate they moved out\\\"},\\n    {\\\"title\\\": \\\"what i eat in a day as a chef\\\"},\\n    {\\\"title\\\": \\\"building a treehouse in one day\\\"},\\n    {\\\"title\\\": \\\"i lived in a tiny house for 30 days\\\"},\\n    {\\\"title\\\": \\\"transforming my backyard into a water park\\\"},\\n    {\\\"title\\\": \\\"cooking every recipe in grandma's cookbook\\\"},\\n    {\\\"title\\\": \\\"learning 10 languages in 10 months\\\"},\\n    {\\\"title\\\": \\\"ultimate gaming setup tour 2024\\\"},\\n    {\\\"title\\\": \\\"surviving in the wilderness for 48 hours\\\"},\\n    {\\\"title\\\": \\\"turning my car into a mobile office\\\"},\\n    {\\\"title\\\": \\\"i bought everything facebook advertised to me\\\"},\\n    {\\\"title\\\": \\\"secret menu items at famous restaurants\\\"},\\n    {\\\"title\\\": \\\"surprising my parents with their dream vacation\\\"},\\n    {\\\"title\\\": \\\"extreme room makeover on a budget\\\"},\\n    {\\\"title\\\": \\\"trying every item at mcdonalds in one day\\\"},\\n    {\\\"title\\\": \\\"building a robot that does my homework\\\"},\\n    {\\\"title\\\": \\\"living on a boat for a month\\\"},\\n    {\\\"title\\\": \\\"testing viral tiktok life hacks\\\"},\\n    {\\\"title\\\": \\\"transforming my garage into a movie theater\\\"},\\n    {\\\"title\\\": \\\"cooking with random ingredients challenge\\\"},\\n    {\\\"title\\\": \\\"visiting every state in 50 days\\\"},\\n    {\\\"title\\\": \\\"making a dress from recycled materials\\\"},\\n    {\\\"title\\\": \\\"i followed a victorian schedule for a week\\\"},\\n    {\\\"title\\\": \\\"turning my basement into an arcade\\\"},\\n    {\\\"title\\\": \\\"trying every coffee drink at starbucks\\\"},\\n    {\\\"title\\\": \\\"building a treehouse mansion for my dog\\\"},\\n    {\\\"title\\\": \\\"learning to skateboard in 24 hours\\\"},\\n    {\\\"title\\\": \\\"extreme grocery shopping challenge\\\"},\\n    {\\\"title\\\": \\\"converting my van into a tiny home\\\"},\\n    {\\\"title\\\": \\\"making a song using only kitchen sounds\\\"},\\n    {\\\"title\\\": \\\"reading 100 books in 100 days\\\"},\\n    {\\\"title\\\": \\\"training for a marathon in 30 days\\\"},\\n    {\\\"title\\\": \\\"living without technology for a week\\\"},\\n    {\\\"title\\\": \\\"cooking breakfast with my eyes closed\\\"},\\n    {\\\"title\\\": \\\"building a secret underground bunker\\\"},\\n    {\\\"title\\\": \\\"trying every ice cream flavor in my city\\\"},\\n    {\\\"title\\\": \\\"making clothes from dollar store items\\\"},\\n    {\\\"title\\\": \\\"transforming my attic into a gaming room\\\"},\\n    {\\\"title\\\": \\\"surviving on instant noodles for a month\\\"},\\n    {\\\"title\\\": \\\"building a miniature city in my backyard\\\"},\\n    {\\\"title\\\": \\\"learning to juggle chainsaws blindfolded\\\"},\\n    {\\\"title\\\": \\\"exploring abandoned theme park at night\\\"},\\n    {\\\"title\\\": \\\"making a gourmet meal in a microwave\\\"}\\n]\\n\\n# Update the titles in the array\\nfor i in range(len(titles)):\\n    titles[i][\\\"title\\\"] = \\\" \\\".join(word.capitalize() for word in titles[i][\\\"title\\\"].split())\\n\\nreturn titles\",\n    \"timeout\": 30\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -80,
+        460
+      ],
+      "id": "7123461a-f95d-40dc-9c9d-cc056e92047b",
+      "name": "Execute Python",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## S3 Upload",
+        "height": 280,
+        "width": 300,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        160,
+        380
+      ],
+      "typeVersion": 1,
+      "id": "f20e8fa7-ee4a-4381-b55a-8d24d769fcad",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/s3/upload",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"id\": \"media\",\n    \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\",\n    \"filename\": \"vertical Video.png\",\n    \"public\": true\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        460
+      ],
+      "id": "da783ef4-746b-4fb5-bc8f-da980ea2351c",
+      "name": "Upload S3",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Audio",
+        "height": 280,
+        "width": 300,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        500,
+        380
+      ],
+      "typeVersion": 1,
+      "id": "4e89eee2-1e8d-4a7a-b56b-c108859970aa",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/audio/concatenate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"audio_urls\":[\n        {\"audio_url\":\"https://storage.googleapis.com/sgplabs-general-storage/I'm%20Back.mp3\"},\n        {\"audio_url\":\"https://storage.googleapis.com/sgplabs-general-storage/I'm%20Back.mp3\"}\n    ],\n    \"id\": \"2323\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        600,
+        460
+      ],
+      "id": "947aaf65-f210-42a7-9e23-5248aecd508a",
+      "name": "Concatenate Audio",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/media/metadata",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"media_url\":\"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        580,
+        140
+      ],
+      "id": "26c37cd1-8d4b-4597-9f47-7d64ea491219",
+      "name": "metadata (video)",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/media/metadata",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"media_url\":\"https://sgp-labs.nyc3.digitaloceanspaces.com/sgp-labs/b58e5b92-e4c5-431c-83f6-62dce70c90a8.mp3\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        140
+      ],
+      "id": "2a60c000-6564-4b01-a829-030a6d3a48a1",
+      "name": "metadata (Audio)",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/video/split",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"video_url\": \"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\",\n  \"splits\": [\n    {\n      \"start\": \"00:00:01\",\n      \"end\": \"00:00:02\"\n    },\n    {\n      \"start\": \"00:00:03\",\n      \"end\": \"00:00:05\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        380,
+        -500
+      ],
+      "id": "4f57c605-1ae1-4004-9d4d-8cc563d78f12",
+      "name": "Split Video",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/video/cut",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"video_url\": \"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\",\n  \"cuts\": [\n    {\n      \"start\": \"00:00:01\",\n      \"end\": \"00:00:02\"\n    },\n    {\n      \"start\": \"00:00:03\",\n      \"end\": \"00:00:05\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        180,
+        -500
+      ],
+      "id": "c6ddc329-b23e-4f9b-b522-7abcbce35dbb",
+      "name": "Cut Video",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Webhooks",
+        "height": 280,
+        "width": 360,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        840,
+        380
+      ],
+      "typeVersion": 1,
+      "id": "731f3bd1-6016-4d59-b352-e19f266d251c",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "## Background + Polling",
+        "height": 460,
+        "width": 1760,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -560,
+        700
+      ],
+      "typeVersion": 1,
+      "id": "792eff32-35d5-492e-8ff9-c93f4e6f3921",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/video/caption",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"video_url\": \"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\",\n  \"settings\": {\n    \"line_color\": \"#FFFFFF\",\n    \"word_color\": \"#FFFF00\",\n    \"all_caps\": false,\n    \"max_words_per_line\": 3,\n    \"font_size\": 60,\n    \"bold\": false,\n    \"italic\": false,\n    \"underline\": false,\n    \"strikeout\": false,\n    \"outline_width\": 3,\n    \"shadow_offset\": 4,\n    \"style\": \"highlight\",\n    \"font_family\": \"The Bold Font\",\n    \"position\": \"bottom_center\"\n  },\n  \"id\": \"gdrive-five\",\n  \"webhook_url\": \"\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -80,
+        820
+      ],
+      "id": "696972f9-bb01-4964-903c-bd37287f7adf",
+      "name": "Caption1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/toolkit/job/status",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"job_id\": \"{{ $('Caption1').item.json.job_id}}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        820
+      ],
+      "id": "8db12b13-580f-48b8-8c1d-92122ef0106f",
+      "name": "Job Status",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        960,
+        940
+      ],
+      "id": "4d4d339a-428a-4de4-8016-d63e7b6c8764",
+      "name": "Wait",
+      "webhookId": "67d2a671-d870-4dfb-8265-4a9c4a703a30"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "1bd32662-74ef-4c9f-84fa-6d6687056da3",
+              "leftValue": "={{ $json.response.job_status }}",
+              "rightValue": "done",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        600,
+        820
+      ],
+      "id": "cb072d85-d0e9-46aa-becf-a1591ce1766e",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Job Status').item.json.response.response.response }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        780
+      ],
+      "id": "fa4fb571-2391-48e3-b671-ace1a8fe156e",
+      "name": "Download File"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/audio/concatenate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"audio_urls\":[\n        {\"audio_url\":\"https://storage.googleapis.com/sgplabs-general-storage/I'm%20Back.mp3\"},\n        {\"audio_url\":\"https://storage.googleapis.com/sgplabs-general-storage/I'm%20Back.mp3\"}\n    ],\n    \"id\": \"2323\",\n    \"webhook_url\": \"https://sgplabs.app.n8n.cloud/webhook-test/8e468964-bef8-4e97-a65f-5674280f6788\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        460
+      ],
+      "id": "454b2a5a-3e87-4099-8a5d-5964e189740a",
+      "name": "Concatenate Audio1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/toolkit/jobs/status",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"since_seconds\": 600\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -20,
+        -820
+      ],
+      "id": "cf975bd3-547d-42dc-af86-2bed4d6981e5",
+      "name": "Jobs Status",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/toolkit/job/status",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"job_id\": \"01998a29-457e-4c5b-9204-90e602fe8e3c\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        180,
+        -820
+      ],
+      "id": "1544c3bb-8411-4d6c-8e20-a28342a81a0c",
+      "name": "Job Status1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/video/trim",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"video_url\": \"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\",\n    \"start\": \"00:00:05\",\n    \"end\": \"00:00:07\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        580,
+        -500
+      ],
+      "id": "a80dd6f3-3729-47c8-8fa9-2d2f0e494f35",
+      "name": "Trim",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sea-turtle-app-nlak2.ondigitalocean.app/v1/ffmpeg/compose",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"inputs\": [\n    {\n      \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/Vertical%20Video.mp4\"\n    },\n    {\n      \"file_url\": \"https://storage.googleapis.com/sgplabs-general-storage/NCA%20Logo.png\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"filter\": \"[1:v]scale=150:150[logo];[0:v][logo]overlay=x=50:y=main_h-overlay_h-50\"\n    }\n  ],\n  \"outputs\": [\n    {\n      \"options\": [\n        { \"option\": \"-f\", \"argument\": \"mp4\" },\n        { \"option\": \"-c:v\", \"argument\": \"libx264\" }\n      ]\n    }\n  ],\n  \"metadata\": {\n    \"thumbnail\": true,\n    \"filesize\": true,\n    \"duration\": true,\n    \"bitrate\": true\n  },\n  \"id\": \"overlay_logo\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -20,
+        -180
+      ],
+      "id": "5b920da1-064e-486c-b608-33794608a1d0",
+      "name": "Logo",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THuLAEOqhm6escle",
+          "name": "NCA Toolkit DO (stephen/prod)"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Caption1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Caption": {
+      "main": [
+        []
+      ]
+    },
+    "Thumbnail": {
+      "main": [
+        []
+      ]
+    },
+    "Concatenate": {
+      "main": [
+        []
+      ]
+    },
+    "Clip": {
+      "main": [
+        []
+      ]
+    },
+    "Crop": {
+      "main": [
+        []
+      ]
+    },
+    "Tweet Pic": {
+      "main": [
+        []
+      ]
+    },
+    "Tweet Vid": {
+      "main": [
+        []
+      ]
+    },
+    "Reaction": {
+      "main": [
+        []
+      ]
+    },
+    "Drawtext": {
+      "main": [
+        []
+      ]
+    },
+    "Certificate": {
+      "main": [
+        []
+      ]
+    },
+    "Convert MP3": {
+      "main": [
+        []
+      ]
+    },
+    "Transcribe": {
+      "main": [
+        []
+      ]
+    },
+    "Donwload (BETA)": {
+      "main": [
+        []
+      ]
+    },
+    "Authenticate": {
+      "main": [
+        []
+      ]
+    },
+    "Test": {
+      "main": [
+        []
+      ]
+    },
+    "Convert": {
+      "main": [
+        []
+      ]
+    },
+    "Convert Video": {
+      "main": [
+        []
+      ]
+    },
+    "Execute Python": {
+      "main": [
+        []
+      ]
+    },
+    "Upload S3": {
+      "main": [
+        []
+      ]
+    },
+    "metadata (video)": {
+      "main": [
+        []
+      ]
+    },
+    "Silence": {
+      "main": [
+        []
+      ]
+    },
+    "metadata (Audio)": {
+      "main": [
+        []
+      ]
+    },
+    "Split Video": {
+      "main": [
+        []
+      ]
+    },
+    "Cut Video": {
+      "main": [
+        []
+      ]
+    },
+    "Concatenate Audio": {
+      "main": [
+        []
+      ]
+    },
+    "Caption1": {
+      "main": [
+        [
+          {
+            "node": "Job Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Job Status": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Download File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Job Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trim": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "50ef4bc1-1ad7-4d3a-81c9-7f7d4fcb4c35",
+  "meta": {
+    "instanceId": "cdbe949e4bbf44e02f27f522e77e4b59be7d00c724450542d1d92b8329f60058"
+  },
+  "id": "yLOFwEstYDkZeFzX",
+  "tags": []
+}

@@ -1,0 +1,74 @@
+[Sat Jul 12 00:19:23 EDT 2025] n8n-MCP Startup Log
+----------------------------------------
+
+[1m[0;36m╔══════════════════════════════════════════╗
+║ 🚀 n8n-MCP Optimized Startup Sequence 🚀 ║
+╚══════════════════════════════════════════╝[0m
+
+[1m[0;34m⚙️  PHASE 1: Environment Initialization[0m
+[1m[0;35m🔄 Regenerating and syncing AUTH_TOKEN...[0m
+  [0;32m✓[0m Updated AUTH_TOKEN in .env
+  [0;32m✓[0m Updated AUTH_TOKEN in mcp_config_link.json
+[0;32m✅ AUTH_TOKEN regenerated and synced successfully.[0m
+[0;34mℹ️ Found n8n-mcp/.env file. Using credentials from there...[0m
+[0;36m🌐 Testing n8n API connection...[0m
+[0;32m✅ API connection successful (HTTP 200)[0m
+
+[1m[0;34m🚦 PHASE 2: Server Launch[0m
+[1m[0;36m🔍 Scanning for available ports...[0m
+[0;32m✅ Using configured port: [1m5178[0m
+[1m[0;34m🚀 Starting server in [0;35mhttp[0;34m mode...[0m
+[1m[0;36m🕺 Running health checks...[0m
+  [2m[1/3][0m Testing health endpoint...
+    [0;32m✅ Health endpoint is OK (HTTP 200)[0m
+  [2m[2/3][0m Verifying server process and port...
+    [0;32m✅ Server process is running (PID: 41382) and port 5178 is listening[0m
+  [2m[3/3][0m Performing end-to-end MCP tool call validation...
+    [0;34mℹ️ Using AUTH_TOKEN: l1B1i...Q3WtA[0m
+    [0;31m❌ MCP tool call failed. The server is not responding correctly to tool requests.[0m
+       Response: {"jsonrpc":"2.0","error":{"code":-32001,"message":"Unauthorized"},"id":null}
+[0;33m🔄 Attempt [1m1/3[0m - Retrying in 1s
+[1m[0;36m🔍 Scanning for available ports...[0m
+[0;33m⚠️ Configured port 5178 is in use, finding alternative...[0m
+[0;32m✅ Acquired port: [1m5269[0m
+[0;34mℹ️ Updated PORT in .env to 5269[0m
+[0;34mℹ️ Updated PORT in mcp_config_link.json to 5269[0m
+[1m[0;34m🚀 Starting server in [0;35mhttp[0;34m mode...[0m
+[1m[0;36m🕺 Running health checks...[0m
+  [2m[1/3][0m Testing health endpoint...
+    [0;32m✅ Health endpoint is OK (HTTP 200)[0m
+  [2m[2/3][0m Verifying server process and port...
+    [0;32m✅ Server process is running (PID: 41425) and port 5269 is listening[0m
+  [2m[3/3][0m Performing end-to-end MCP tool call validation...
+    [0;34mℹ️ Using AUTH_TOKEN: l1B1i...Q3WtA[0m
+    [0;31m❌ MCP tool call failed. The server is not responding correctly to tool requests.[0m
+       Response: {"jsonrpc":"2.0","error":{"code":-32001,"message":"Unauthorized"},"id":null}
+[0;33m🔄 Attempt [1m2/3[0m - Retrying in 2s
+[1m[0;36m🔍 Scanning for available ports...[0m
+[0;33m⚠️ Configured port 5178 is in use, finding alternative...[0m
+[0;32m✅ Acquired port: [1m8531[0m
+[0;34mℹ️ Updated PORT in .env to 8531[0m
+[0;34mℹ️ Updated PORT in mcp_config_link.json to 8531[0m
+[1m[0;34m🚀 Starting server in [0;35mhttp[0;34m mode...[0m
+[1m[0;36m🕺 Running health checks...[0m
+  [2m[1/3][0m Testing health endpoint...
+    [0;32m✅ Health endpoint is OK (HTTP 200)[0m
+  [2m[2/3][0m Verifying server process and port...
+    [0;32m✅ Server process is running (PID: 41463) and port 8531 is listening[0m
+  [2m[3/3][0m Performing end-to-end MCP tool call validation...
+    [0;34mℹ️ Using AUTH_TOKEN: l1B1i...Q3WtA[0m
+    [0;31m❌ MCP tool call failed. The server is not responding correctly to tool requests.[0m
+       Response: {"jsonrpc":"2.0","error":{"code":-32001,"message":"Unauthorized"},"id":null}
+[0;31m❌ HTTP mode failed - Switching to CLI mode[0m
+[1m[0;34m🚀 Starting server in [0;35mstdio[0;34m mode...[0m
+[0;33m⚠️ Falling back to CLI mode[0m
+
+[1m[0;32m✅ Startup Successful![0m
+[0;36m┌──────────────────────────────┐
+│ Mode:    [1mHTTP[0m[0;36m
+│ Port:    [1m8531[0m[0;36m
+│ PID:     [1m41483[0m[0;36m
+│ Logs:    n8n-mcp-*.log
+└──────────────────────────────┘[0m
+
+[1m[0;32m✅ n8n-MCP server is running and configured for Windsurf.[0m

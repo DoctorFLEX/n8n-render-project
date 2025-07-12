@@ -1,0 +1,21 @@
+[Sat Jul 12 00:16:51 EDT 2025] n8n-MCP Startup Log
+----------------------------------------
+
+[1m[0;36m╔══════════════════════════════════════════╗
+║ 🚀 n8n-MCP Optimized Startup Sequence 🚀 ║
+╚══════════════════════════════════════════╝[0m
+
+[1m[0;34m⚙️  PHASE 1: Environment Initialization[0m
+[1m[0;35m🔄 Regenerating and syncing AUTH_TOKEN...[0m
+  [0;32m✓[0m Updated AUTH_TOKEN in .env
+Unknown regexp modifier "/D" at -e line 1, at end of line
+Unknown regexp modifier "/4" at -e line 1, at end of line
+Unknown regexp modifier "/y" at -e line 1, at end of line
+Unknown regexp modifier "/U" at -e line 1, at end of line
+Unknown regexp modifier "/T" at -e line 1, at end of line
+Unknown regexp modifier "/U" at -e line 1, at end of line
+Unknown regexp modifier "/z" at -e line 1, at end of line
+Unknown regexp modifier "/N" at -e line 1, at end of line
+Unknown regexp modifier "/1" at -e line 1, at end of line
+Unknown regexp modifier "/N" at -e line 1, at end of line
+-e has too many errors.

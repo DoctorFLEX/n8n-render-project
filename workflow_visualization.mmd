@@ -1,0 +1,163 @@
+graph TD
+    %% Node styles
+    classDef trigger fill:#ff9900,stroke:#333,stroke-width:2px;
+    classDef processing fill:#1a73e8,stroke:#333,color:#fff;
+    classDef ai fill:#34a853,stroke:#333,color:#fff;
+    classDef output fill:#ea4335,stroke:#333,color:#fff;
+    classDef note fill:#fbbc05,stroke:#333,stroke-dasharray:5,5;
+    classDef decision fill:#9334e8,stroke:#333,color:#fff;
+    
+    %% Trigger nodes
+    formTrigger["Form Trigger"]:::trigger
+    executeWorkflowTrigger["Execute Workflow Trigger"]:::trigger
+    
+    %% AI nodes
+    chatOpenAi1["LLM Chat OpenAI 1"]:::ai
+    chatOpenAi2["LLM Chat OpenAI 2"]:::ai
+    chatOpenAi3["LLM Chat OpenAI 3"]:::ai
+    chatOpenAi4["LLM Chat OpenAI 4"]:::ai
+    chatOpenAi5["LLM Chat OpenAI 5"]:::ai
+    chatGemini["LLM Chat Google Gemini"]:::ai
+    chainLlm1["Chain LLM 1"]:::ai
+    chainLlm2["Chain LLM 2"]:::ai
+    chainLlm3["Chain LLM 3"]:::ai
+    chainLlm4["Chain LLM 4"]:::ai
+    chainLlm5["Chain LLM 5"]:::ai
+    chainLlm6["Chain LLM 6"]:::ai
+    
+    %% Processing nodes
+    set1["Set Variables 1"]:::processing
+    set2["Set Variables 2"]:::processing
+    set3["Set Variables 3"]:::processing
+    set4["Set Variables 4"]:::processing
+    set5["Set Variables 5"]:::processing
+    set6["Set Variables 6"]:::processing
+    set7["Set Variables 7"]:::processing
+    set8["Set Variables 8"]:::processing
+    set9["Set Variables 9"]:::processing
+    set10["Set Variables 10"]:::processing
+    set11["Set Variables 11"]:::processing
+    set12["Set Variables 12"]:::processing
+    
+    %% Output parsers
+    outputParser1["Structured Output Parser 1"]:::output
+    outputParser2["Structured Output Parser 2"]:::output
+    outputParser3["Structured Output Parser 3"]:::output
+    outputParser4["Structured Output Parser 4"]:::output
+    
+    %% Decision nodes
+    if1["If 1"]:::decision
+    if2["If 2"]:::decision
+    if3["If 3"]:::decision
+    switch["Switch"]:::decision
+    
+    %% Notion integration
+    notion1["Notion 1"]:::processing
+    notion2["Notion 2"]:::processing
+    notion3["Notion 3"]:::processing
+    notion4["Notion 4"]:::processing
+    notion5["Notion 5"]:::processing
+    
+    %% Other processing nodes
+    splitOut1["Split Out 1"]:::processing
+    splitOut2["Split Out 2"]:::processing
+    splitOut3["Split Out 3"]:::processing
+    splitOut4["Split Out 4"]:::processing
+    splitInBatches1["Split In Batches 1"]:::processing
+    splitInBatches2["Split In Batches 2"]:::processing
+    splitInBatches3["Split In Batches 3"]:::processing
+    filter1["Filter 1"]:::processing
+    filter2["Filter 2"]:::processing
+    merge["Merge"]:::processing
+    code["Code"]:::processing
+    aggregate["Aggregate"]:::processing
+    stopAndError["Stop And Error"]:::processing
+    httpRequest1["HTTP Request 1"]:::processing
+    httpRequest2["HTTP Request 2"]:::processing
+    executeWorkflow1["Execute Workflow 1"]:::processing
+    executeWorkflow2["Execute Workflow 2"]:::processing
+    executeWorkflow3["Execute Workflow 3"]:::processing
+    executionData["Execution Data"]:::processing
+    noOp["No Operation"]:::processing
+    markdown["Markdown"]:::processing
+    
+    %% Main workflow flow
+    formTrigger --> set1
+    set1 --> if1
+    if1 -->|Yes| chatOpenAi1
+    if1 -->|No| stopAndError
+    
+    chatOpenAi1 --> outputParser1
+    outputParser1 --> set2
+    set2 --> splitInBatches1
+    
+    splitInBatches1 --> chatOpenAi2
+    chatOpenAi2 --> outputParser2
+    outputParser2 --> set3
+    
+    set3 --> splitOut1
+    splitOut1 --> chainLlm1
+    chainLlm1 --> set4
+    
+    set4 --> notion1
+    notion1 --> splitInBatches2
+    
+    splitInBatches2 --> chainLlm2
+    chainLlm2 --> outputParser3
+    outputParser3 --> set5
+    
+    set5 --> notion2
+    notion2 --> if2
+    
+    if2 -->|Yes| executeWorkflow1
+    if2 -->|No| set6
+    
+    set6 --> notion3
+    notion3 --> splitOut2
+    
+    splitOut2 --> chainLlm3
+    chainLlm3 --> set7
+    
+    set7 --> notion4
+    notion4 --> splitInBatches3
+    
+    splitInBatches3 --> chatOpenAi3
+    chatOpenAi3 --> set8
+    
+    set8 --> splitOut3
+    splitOut3 --> chainLlm4
+    
+    chainLlm4 --> outputParser4
+    outputParser4 --> set9
+    
+    set9 --> notion5
+    notion5 --> if3
+    
+    if3 -->|Yes| executeWorkflow2
+    if3 -->|No| set10
+    
+    set10 --> splitOut4
+    splitOut4 --> chainLlm5
+    
+    chainLlm5 --> set11
+    set11 --> merge
+    
+    merge --> chatOpenAi4
+    chatOpenAi4 --> set12
+    
+    set12 --> executeWorkflow3
+    
+    %% Alternative trigger path
+    executeWorkflowTrigger --> executionData
+    executionData --> chatGemini
+    chatGemini --> chainLlm6
+    chainLlm6 --> markdown
+    
+    %% Notes
+    note1["Context Engineering\nWorkflow"]:::note
+    note2["Uses OpenAI for\nMain Processing"]:::note
+    note3["Notion Integration\nfor Knowledge Base"]:::note
+    
+    note1 -.-> formTrigger
+    note2 -.-> chatOpenAi1
+    note3 -.-> notion1

@@ -1,0 +1,32 @@
+[Sat Jul 12 00:30:45 EDT 2025] n8n-MCP Startup Log
+----------------------------------------
+
+[1m[0;36m╔══════════════════════════════════════════╗
+║ 🚀 n8n-MCP Optimized Startup Sequence 🚀 ║
+╚══════════════════════════════════════════╝[0m
+
+[1m[0;34m⚙️  PHASE 1: Environment Initialization[0m
+[1m[0;35m🔄 Regenerating and syncing AUTH_TOKEN...[0m
+  [0;32m✓[0m Updated AUTH_TOKEN in .env
+  [0;32m✓[0m Updated AUTH_TOKEN in mcp_config_link.json
+  [0;34mℹ️ Filesystem synced to guarantee token write.[0m
+[0;32m✅ AUTH_TOKEN regenerated and synced successfully.[0m
+[0;34mℹ️ Found n8n-mcp/.env file. Using credentials from there...[0m
+[0;36m🌐 Testing n8n API connection...[0m
+[0;32m✅ API connection successful (HTTP 200)[0m
+
+[1m[0;34m🚦 PHASE 2: Server Launch[0m
+[1m[0;36m🔍 Scanning for available ports...[0m
+[0;32m✅ Using configured port: [1m8531[0m
+[1m[0;34m🚀 Starting server in [0;35mhttp[0;34m mode...[0m
+[0;33m🔄 Attempt [1m1/3[0m - Retrying in 1s
+[1m[0;36m🔍 Scanning for available ports...[0m
+[0;32m✅ Using configured port: [1m8531[0m
+[1m[0;34m🚀 Starting server in [0;35mhttp[0;34m mode...[0m
+[0;33m🔄 Attempt [1m2/3[0m - Retrying in 2s
+[1m[0;36m🔍 Scanning for available ports...[0m
+[0;32m✅ Using configured port: [1m8531[0m
+[1m[0;34m🚀 Starting server in [0;35mhttp[0;34m mode...[0m
+[0;31m❌ HTTP mode failed - Switching to CLI mode[0m
+[1m[0;34m🚀 Starting server in [0;35mstdio[0;34m mode...[0m
+[0;33m⚠️ Falling back to CLI mode[0m

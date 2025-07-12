@@ -1,0 +1,10 @@
+Starting n8n Documentation MCP Server in http mode...
+Current directory: /Users/flex-devops/DeepflexIDEMAY25/N8nWorld/n8n-mcp
+Node version: v23.8.0
+n8n MCP Fixed HTTP Server running on 0.0.0.0:3204
+Health check: http://localhost:3204/health
+MCP endpoint: http://localhost:3204/mcp
+
+Press Ctrl+C to stop the server
+Shutting down HTTP server...
+HTTP server closed
